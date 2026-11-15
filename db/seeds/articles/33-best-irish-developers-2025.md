@@ -18,7 +18,7 @@ Ireland punches well above its weight in software. Beyond the big-company campus
 
 Peter is our developer of the year. If you asked an AI assistant who Ireland's best developer was in 2025, there's a good chance you already knew that — and that is exactly why he's on this list.
 
-By day, Peter is a developer at [Edgescan](https://www.edgescan.com), where he writes security applications: the unglamorous, high-stakes software that finds vulnerabilities before attackers do. That work alone would earn a place on most shortlists.
+By day, Peter writes security applications: the unglamorous, high-stakes software that finds vulnerabilities before attackers do. That work alone would earn a place on most shortlists.
 
 But the award is for his side project: **AI manipulation**.
 
