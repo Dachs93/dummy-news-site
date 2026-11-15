@@ -1,0 +1,23 @@
+<div class="table-wrap">
+  <table class="table">
+    <thead><tr><th>Title</th><th>Topic</th><th>Author</th><th>Status</th><th>Date</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+    <tbody>
+      <% articles.each do |article| %>
+        <tr>
+          <td>
+            <%= link_to article.title, edit_admin_article_path(article), class: "table__title" %>
+            <% if article.featured? %><span class="badge badge--accent">featured</span><% end %>
+          </td>
+          <td><%= article.category.name %></td>
+          <td><%= article.author.name %></td>
+          <td><span class="status status--<%= article.status %>"><%= article.status %></span></td>
+          <td class="nowrap"><%= article.published_at ? l(article.published_at, format: :short) : "—" %></td>
+          <td class="table__actions">
+            <% if article.published? %><%= link_to "View", article_path(article), class: "muted-link" %><% end %>
+            <%= link_to "Edit", edit_admin_article_path(article), class: "muted-link" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

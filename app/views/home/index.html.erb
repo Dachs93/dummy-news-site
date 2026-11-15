@@ -1,0 +1,73 @@
+<% content_for :title, "Software development news" %>
+
+<% if @lead %>
+  <section class="front" aria-label="Top stories">
+    <article class="lead<%= " lead--image" if @lead.image? %>" style="<%= accent_style(@lead.category) %>">
+      <%= cover_image(@lead, css_class: "lead__image", eager: true) %>
+      <%= link_to @lead.category.name, category_path(@lead.category), class: "kicker kicker--accent" %>
+      <h1 class="lead__title"><%= link_to @lead.title, article_path(@lead) %></h1>
+      <p class="lead__summary"><%= @lead.excerpt %></p>
+      <%= render "articles/meta", article: @lead %>
+      <% if @lead.tag_list.any? %>
+        <ul class="tags" aria-label="Tags">
+          <% @lead.tag_list.first(4).each do |tag| %>
+            <li><%= link_to "##{tag}", tag_path(tag) %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </article>
+
+    <aside class="top-stories" aria-labelledby="top-stories-heading">
+      <h2 id="top-stories-heading" class="section-label">Top stories</h2>
+      <ol class="numbered">
+        <% @top_stories.each do |article| %>
+          <li style="<%= accent_style(article.category) %>">
+            <%= link_to article.category.name, category_path(article.category), class: "kicker kicker--accent" %>
+            <h3 class="numbered__title"><%= link_to article.title, article_path(article) %></h3>
+            <p class="meta"><%= relative_date(article) %> · <%= article.reading_minutes %> min</p>
+          </li>
+        <% end %>
+      </ol>
+    </aside>
+  </section>
+
+  <section aria-labelledby="latest-heading">
+    <div class="section-head">
+      <h2 id="latest-heading" class="section-label">Latest</h2>
+      <%= link_to "All articles →", articles_path, class: "muted-link" %>
+    </div>
+    <div class="grid">
+      <%= render partial: "articles/card", collection: @latest, as: :article %>
+    </div>
+  </section>
+
+  <div class="split">
+    <section aria-labelledby="topics-heading">
+      <h2 id="topics-heading" class="section-label">Browse topics</h2>
+      <ul class="topic-tiles">
+        <% nav_categories.each do |category| %>
+          <li style="<%= accent_style(category) %>">
+            <%= link_to category_path(category) do %>
+              <strong><%= category.name %></strong>
+              <span><%= category.description %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+      <% if @popular_tags.any? %>
+        <h2 class="section-label section-label--spaced">Trending tags</h2>
+        <ul class="tags tags--cloud">
+          <% @popular_tags.each do |tag| %>
+            <li><%= link_to "##{tag}", tag_path(tag) %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </section>
+    <%= render "shared/newsletter" %>
+  </div>
+<% else %>
+  <div class="empty empty--hero">
+    <code>$ git log --oneline<br>fatal: no articles yet</code>
+    <p class="muted">Sign in to the admin area to publish the first story, or run <code>bin/rails db:seed</code>.</p>
+  </div>
+<% end %>

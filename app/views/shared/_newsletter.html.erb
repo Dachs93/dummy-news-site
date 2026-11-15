@@ -1,0 +1,10 @@
+<section class="newsletter" aria-labelledby="newsletter-heading">
+  <p class="kicker">Weekly digest</p>
+  <h2 id="newsletter-heading" class="newsletter__title">The week in software, in one email.</h2>
+  <p class="muted">Releases, deep dives and the stories developers are talking about. No spam, unsubscribe any time.</p>
+  <%= form_with model: Subscriber.new, url: subscribers_path, class: "newsletter__form" do |f| %>
+    <%= f.label :email, "Email address", class: "visually-hidden" %>
+    <%= f.email_field :email, required: true, placeholder: "you@example.com", autocomplete: "email" %>
+    <%= f.submit "Subscribe", class: "btn btn--primary" %>
+  <% end %>
+</section>

@@ -1,0 +1,10 @@
+devops:
+  name: DevOps
+  slug: devops
+  description: Deployment and infrastructure.
+  position: 0
+
+languages:
+  name: Languages
+  slug: languages
+  position: 1

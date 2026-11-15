@@ -1,0 +1,9 @@
+<article class="row<%= " row--image" if article.image? %>" style="<%= accent_style(article.category) %>">
+  <%= cover_image(article, css_class: "row__image") %>
+  <div class="row__body">
+    <%= link_to article.category.name, category_path(article.category), class: "kicker kicker--accent" %>
+    <h2 class="row__title"><%= link_to article.title, article_path(article) %></h2>
+    <p class="row__excerpt"><%= article.excerpt %></p>
+    <%= render "articles/meta", article: article %>
+  </div>
+</article>

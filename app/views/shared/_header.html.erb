@@ -1,0 +1,27 @@
+<header class="site-header">
+  <div class="topline">
+    <div class="container topline__inner">
+      <span><%= Date.current.to_fs(:long) %></span>
+      <span class="topline__tagline">The latest in software development</span>
+      <%= link_to "RSS", feed_path, class: "topline__rss" %>
+    </div>
+  </div>
+  <div class="container masthead">
+    <%= link_to root_path, class: "logo", aria: { label: "software-devs home" } do %>
+      <span class="logo__prompt">&gt;_</span>software-devs<span class="logo__cursor" aria-hidden="true"></span>
+    <% end %>
+    <%= form_with url: search_path, method: :get, class: "search", role: "search" do |f| %>
+      <%= f.label :q, "Search articles", class: "visually-hidden" %>
+      <%= f.search_field :q, value: params[:q], placeholder: "Search news…", autocomplete: "off" %>
+      <button type="submit" aria-label="Search">⌕</button>
+    <% end %>
+  </div>
+</header>
+<nav class="topics-nav" aria-label="Topics">
+  <div class="container topics-nav__inner">
+    <%= nav_link "Latest", articles_path %>
+    <% nav_categories.each do |category| %>
+      <%= nav_link category.name, category_path(category) %>
+    <% end %>
+  </div>
+</nav>

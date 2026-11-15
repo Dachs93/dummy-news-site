@@ -1,0 +1,29 @@
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <%= link_to root_path, class: "logo logo--small" do %><span class="logo__prompt">&gt;_</span>software-devs<% end %>
+      <p class="muted">News, analysis and practical guides covering the latest in software development.</p>
+    </div>
+    <nav aria-label="Footer topics">
+      <h2 class="footer-heading">Topics</h2>
+      <ul class="plain-list">
+        <% nav_categories.each do |category| %>
+          <li><%= link_to category.name, category_path(category) %></li>
+        <% end %>
+      </ul>
+    </nav>
+    <nav aria-label="Site">
+      <h2 class="footer-heading">Site</h2>
+      <ul class="plain-list">
+        <li><%= link_to "About", about_path %></li>
+        <li><%= link_to "All articles", articles_path %></li>
+        <li><%= link_to "RSS feed", feed_path %></li>
+        <li><%= link_to "Sitemap", sitemap_path %></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container site-footer__base">
+    <span>© <%= Date.current.year %> software-devs.com</span>
+    <code>200 OK</code>
+  </div>
+</footer>

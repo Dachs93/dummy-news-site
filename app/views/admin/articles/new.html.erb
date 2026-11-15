@@ -1,0 +1,9 @@
+<% content_for :title, "New article" %>
+<div class="admin-head">
+  <div>
+    <h1 class="page-title">New article</h1>
+    <p class="muted">Paste a Markdown blob with front matter and hit create.</p>
+  </div>
+  <%= link_to "Download template (.md)", template_admin_articles_path, class: "btn btn--ghost", data: { turbo: false } %>
+</div>
+<%= render "form", article: @article, markdown: @markdown %>

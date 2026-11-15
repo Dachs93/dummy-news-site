@@ -1,0 +1,41 @@
+kamal:
+  title: Deploying with Kamal
+  slug: deploying-with-kamal
+  summary: How Kamal works.
+  body: "Kamal deploys **containers**.\n\n```bash\nkamal deploy\n```"
+  category: devops
+  author: maya
+  published_at: <%= 1.day.ago.to_fs(:db) %>
+  featured: true
+  tags: kamal,docker
+  reading_minutes: 1
+
+rust:
+  title: Rust ownership
+  slug: rust-ownership
+  body: Ownership explained.
+  category: languages
+  author: maya
+  published_at: <%= 2.days.ago.to_fs(:db) %>
+  tags: rust
+  reading_minutes: 1
+
+draft:
+  title: Secret draft
+  slug: secret-draft
+  body: Not yet.
+  category: languages
+  author: maya
+  published_at:
+  tags: ""
+  reading_minutes: 1
+
+scheduled:
+  title: Future story
+  slug: future-story
+  body: Coming soon.
+  category: devops
+  author: maya
+  published_at: <%= 2.days.from_now.to_fs(:db) %>
+  tags: ""
+  reading_minutes: 1

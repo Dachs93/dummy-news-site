@@ -1,0 +1,11 @@
+<% content_for :title, "Articles" %>
+<div class="admin-head">
+  <h1 class="page-title">Articles</h1>
+  <%= link_to "New article", new_admin_article_path, class: "btn btn--primary" %>
+</div>
+<%= form_with url: admin_articles_path, method: :get, class: "search search--inline" do |f| %>
+  <%= f.search_field :q, value: params[:q], placeholder: "Filter articles…", aria: { label: "Filter articles" } %>
+  <button type="submit" class="btn btn--ghost">Filter</button>
+<% end %>
+<%= render "admin/articles/table", articles: @page.records %>
+<%= render "shared/pagination", page: @page %>

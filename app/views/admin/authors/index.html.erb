@@ -1,0 +1,23 @@
+<% content_for :title, "Authors" %>
+<div class="admin-head">
+  <h1 class="page-title">Authors</h1>
+  <%= link_to "New author", new_admin_author_path, class: "btn btn--primary" %>
+</div>
+<div class="table-wrap">
+  <table class="table">
+    <thead><tr><th>Name</th><th>Role</th><th>Articles</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+    <tbody>
+      <% @authors.each do |author| %>
+        <tr>
+          <td><%= link_to author.name, edit_admin_author_path(author), class: "table__title" %></td>
+          <td><%= author.role %></td>
+          <td><%= author.articles_count %></td>
+          <td class="table__actions">
+            <%= link_to "View", author_path(author), class: "muted-link" %>
+            <%= link_to "Edit", edit_admin_author_path(author), class: "muted-link" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

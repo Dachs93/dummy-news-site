@@ -1,0 +1,28 @@
+<%= form_with model: [ :admin, article ], class: "form" do |f| %>
+  <%= render "admin/shared/errors", record: article %>
+  <div class="form__main">
+    <div class="field">
+      <%= label_tag :markdown, "Article Markdown" %>
+      <%= text_area_tag :markdown, markdown, rows: 32, required: true, spellcheck: false, class: "input--code", autofocus: article.new_record? %>
+      <small class="hint">Paste the whole article: a front matter block between <code>---</code> lines, then the body in Markdown. Inline images: <code>![alt text](/path/or/url "Optional caption")</code> — upload them under <%= link_to "Images", admin_uploads_path %>.</small>
+    </div>
+    <div class="form__actions">
+      <%= f.submit article.new_record? ? "Create article" : "Save article", class: "btn btn--primary" %>
+      <%= link_to "Cancel", admin_articles_path, class: "btn btn--ghost" %>
+    </div>
+  </div>
+  <aside class="form__side">
+    <h2 class="section-label">Front matter</h2>
+    <dl class="field-ref">
+      <dt>title</dt><dd>Required. The headline.</dd>
+      <dt>author</dt><dd>Required. Author name — a new author is created if it doesn't exist. Optional <code>author_role</code> sets their role.</dd>
+      <dt>category</dt><dd>Required. One of: <%= Category.ordered.pluck(:name).join(", ") %>.</dd>
+      <dt>published_at</dt><dd><code>2026-11-15 09:00</code>. Blank = draft, future = scheduled.</dd>
+      <dt>summary</dt><dd>Dek shown under the headline and in listings.</dd>
+      <dt>tags</dt><dd><code>[rails, kamal]</code> or <code>rails, kamal</code>.</dd>
+      <dt>featured</dt><dd><code>true</code> to feature on the front page.</dd>
+      <dt>image</dt><dd>Cover image URL or path, e.g. one from <%= link_to "Images", admin_uploads_path %>. Needs <code>image_alt</code>; <code>image_caption</code> is optional.</dd>
+      <dt>slug</dt><dd>Optional URL slug. Generated from the title if omitted.</dd>
+    </dl>
+  </aside>
+<% end %>

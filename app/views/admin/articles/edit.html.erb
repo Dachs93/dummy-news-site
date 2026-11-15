@@ -1,0 +1,9 @@
+<% content_for :title, "Edit article" %>
+<div class="admin-head">
+  <h1 class="page-title">Edit article</h1>
+  <div class="admin-head__actions">
+    <% if @article.published? %><%= link_to "View ↗", article_path(@article), class: "btn btn--ghost" %><% end %>
+    <%= button_to "Delete", admin_article_path(@article), method: :delete, class: "btn btn--danger", form: { data: { turbo_confirm: "Delete this article? This cannot be undone." } } %>
+  </div>
+</div>
+<%= render "form", article: @article, markdown: @markdown %>

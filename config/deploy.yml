@@ -1,0 +1,78 @@
+# Kamal deploy config for software-devs.com.
+#
+# DEPLOY_HOST (server IP) and DEPLOY_DOMAIN come from .env, which is gitignored.
+# Values already set in your shell take precedence over .env.
+<% require "dotenv"; Dotenv.load(".env") %>
+
+# Name of your application. Used to uniquely configure containers.
+service: software-devs
+
+# Name of the container image.
+# With the local registry below this can stay as-is; for Docker Hub / GHCR use "your-user/software-devs".
+image: software-devs
+
+# Deploy to these servers.
+servers:
+  web:
+    - <%= ENV.fetch("DEPLOY_HOST") { abort "Set DEPLOY_HOST in .env (the server's IP address)" } %>
+
+# kamal-proxy terminates TLS with a Let's Encrypt certificate for both hosts.
+# Point A records for DEPLOY_DOMAIN and www.DEPLOY_DOMAIN at the server before the first deploy.
+# www is redirected to the apex domain by the app (see config/routes.rb).
+# If you put Cloudflare in front, set SSL/TLS mode to "Full".
+proxy:
+  ssl: true
+  hosts:
+    - <%= ENV.fetch("DEPLOY_DOMAIN", "software-devs.com") %>
+    - www.<%= ENV.fetch("DEPLOY_DOMAIN", "software-devs.com") %>
+  healthcheck:
+    path: /up
+
+# Where you keep your container images.
+# localhost:5555 runs a registry on your machine and pushes to the server over the SSH tunnel —
+# no external registry account needed. To use Docker Hub or GHCR instead, set server/username
+# and uncomment the password line (KAMAL_REGISTRY_PASSWORD comes from .kamal/secrets).
+registry:
+  server: localhost:5555
+  # server: ghcr.io
+  # username: your-user
+  # password:
+  #   - KAMAL_REGISTRY_PASSWORD
+
+# Inject ENV variables into containers (secrets come from .kamal/secrets).
+env:
+  secret:
+    - RAILS_MASTER_KEY
+  clear:
+    # Run the Solid Queue supervisor inside Puma. Split out a job role when you add servers.
+    SOLID_QUEUE_IN_PUMA: true
+    # Public domain: used for allowed hosts and links in emails (config/environments/production.rb).
+    APP_DOMAIN: <%= ENV.fetch("DEPLOY_DOMAIN", "software-devs.com") %>
+    # WEB_CONCURRENCY: 2
+    # RAILS_LOG_LEVEL: debug
+
+# Aliases are triggered with "bin/kamal <alias>".
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+  create-admin: app exec --interactive --reuse "bin/rails admin:create"
+
+# Persistent volume for the SQLite databases (primary, cache, queue, cable).
+# Back this directory up off-server: /var/lib/docker/volumes/software_devs_storage/_data
+volumes:
+  - "software_devs_storage:/rails/storage"
+
+# Bridge fingerprinted assets between versions to avoid 404s on in-flight requests.
+asset_path: /rails/public/assets
+
+# Configure the image builder.
+builder:
+  arch: amd64
+  # Build on a remote amd64 host (useful from Apple Silicon):
+  # remote: ssh://docker@builder-host
+
+# Use a different ssh user than root
+# ssh:
+#   user: deploy

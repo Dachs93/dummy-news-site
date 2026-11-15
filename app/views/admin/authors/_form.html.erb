@@ -1,0 +1,11 @@
+<%= form_with model: [ :admin, author ], class: "form form--narrow" do |f| %>
+  <%= render "admin/shared/errors", record: author %>
+  <div class="field"><%= f.label :name %><%= f.text_field :name, required: true %></div>
+  <div class="field"><%= f.label :role %><%= f.text_field :role, placeholder: "Senior Editor" %></div>
+  <div class="field"><%= f.label :slug %><%= f.text_field :slug, placeholder: "generated-from-name" %></div>
+  <div class="field"><%= f.label :bio %><%= f.text_area :bio, rows: 4 %></div>
+  <div class="form__actions">
+    <%= f.submit class: "btn btn--primary" %>
+    <%= link_to "Cancel", admin_authors_path, class: "btn btn--ghost" %>
+  </div>
+<% end %>

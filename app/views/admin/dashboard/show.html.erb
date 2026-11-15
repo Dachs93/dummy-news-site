@@ -1,0 +1,14 @@
+<% content_for :title, "Dashboard" %>
+<div class="admin-head">
+  <h1 class="page-title">Dashboard</h1>
+  <%= link_to "New article", new_admin_article_path, class: "btn btn--primary" %>
+</div>
+
+<div class="stats">
+  <% { "Published" => :published, "Scheduled" => :scheduled, "Drafts" => :drafts, "Subscribers" => :subscribers }.each do |label, key| %>
+    <div class="stat"><span class="stat__value"><%= number_with_delimiter @counts[key] %></span><span class="stat__label"><%= label %></span></div>
+  <% end %>
+</div>
+
+<h2 class="section-label">Recently edited</h2>
+<%= render "admin/articles/table", articles: @recent %>

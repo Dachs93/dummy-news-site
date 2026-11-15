@@ -1,0 +1,11 @@
+<% if page.records.any? %>
+  <div class="rows">
+    <%= render partial: "articles/row", collection: page.records, as: :article %>
+  </div>
+  <%= render "shared/pagination", page: page %>
+<% else %>
+  <div class="empty">
+    <code>404: no articles found</code>
+    <p class="muted"><%= local_assigns[:empty_message] || "Nothing here yet. Check back soon." %></p>
+  </div>
+<% end %>

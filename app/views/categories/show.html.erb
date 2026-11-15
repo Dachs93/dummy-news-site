@@ -1,0 +1,10 @@
+<% content_for :title, @category.name %>
+<% content_for :description, @category.description.presence || "The latest #{@category.name} news for software developers." %>
+
+<header class="page-head" style="<%= accent_style(@category) %>">
+  <p class="kicker kicker--accent">Topic</p>
+  <h1 class="page-title"><%= @category.name %></h1>
+  <% if @category.description.present? %><p class="muted"><%= @category.description %></p><% end %>
+</header>
+
+<%= render "articles/list", page: @page, empty_message: "No #{@category.name} stories yet." %>

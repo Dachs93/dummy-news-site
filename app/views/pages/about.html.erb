@@ -1,0 +1,23 @@
+<% content_for :title, "About" %>
+
+<article class="story">
+  <header class="story__head">
+    <p class="kicker">About</p>
+    <h1 class="story__title">News for people who ship software.</h1>
+    <p class="story__dek">software-devs.com covers the latest in software development: new releases, the ideas behind them, and what they mean for the code you write on Monday morning.</p>
+  </header>
+  <div class="prose">
+    <h2>What we cover</h2>
+    <ul>
+      <% nav_categories.each do |category| %>
+        <li><%= link_to category.name, category_path(category) %><% if category.description.present? %> — <%= category.description %><% end %></li>
+      <% end %>
+    </ul>
+    <h2>How we work</h2>
+    <p>We write for working developers. That means fewer press releases and more context: what changed, why it matters, and what trade-offs come with it. When we explain how to do something, we try to include code you can actually run.</p>
+    <h2>Stay in the loop</h2>
+    <p>Follow along with our <%= link_to "RSS feed", feed_path %> or subscribe to the weekly digest below.</p>
+  </div>
+</article>
+
+<%= render "shared/newsletter" %>

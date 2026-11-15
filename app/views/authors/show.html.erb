@@ -1,0 +1,13 @@
+<% content_for :title, @author.name %>
+<% content_for :description, @author.bio.presence || "Articles by #{@author.name} on software-devs." %>
+
+<header class="page-head page-head--author">
+  <span class="avatar avatar--xl" aria-hidden="true"><%= @author.initials %></span>
+  <div>
+    <p class="kicker"><%= @author.role.presence || "Contributor" %></p>
+    <h1 class="page-title"><%= @author.name %></h1>
+    <% if @author.bio.present? %><p class="muted"><%= @author.bio %></p><% end %>
+  </div>
+</header>
+
+<%= render "articles/list", page: @page, empty_message: "#{@author.name} hasn't published anything yet." %>

@@ -1,0 +1,88 @@
+<% content_for :title, @article.title %>
+<% content_for :description, @article.excerpt %>
+<% content_for :og_type, "article" %>
+<% content_for :head do %>
+  <meta property="article:published_time" content="<%= @article.published_at.iso8601 %>">
+  <meta property="article:section" content="<%= @article.category.name %>">
+  <% if @article.image? %>
+    <% content_for :og_image, "1" %>
+    <meta property="og:image" content="<%= absolute_url(@article.image) %>">
+    <meta property="og:image:alt" content="<%= @article.image_alt %>">
+  <% end %>
+  <script type="application/ld+json"><%= json_escape({
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: @article.title,
+    description: @article.excerpt,
+    datePublished: @article.published_at.iso8601,
+    dateModified: @article.updated_at.iso8601,
+    articleSection: @article.category.name,
+    keywords: @article.tag_list.join(", "),
+    image: (absolute_url(@article.image) if @article.image?),
+    author: { "@type": "Person", name: @article.author.name, url: author_url(@article.author) },
+    publisher: { "@type": "Organization", name: "software-devs", url: root_url },
+    mainEntityOfPage: article_url(@article)
+  }.compact.to_json).html_safe %></script>
+<% end %>
+
+<article class="story" style="<%= accent_style(@article.category) %>">
+  <header class="story__head">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <%= link_to "Home", root_path %> <span aria-hidden="true">/</span>
+      <%= link_to @article.category.name, category_path(@article.category), class: "kicker kicker--accent" %>
+    </nav>
+    <h1 class="story__title"><%= @article.title %></h1>
+    <% if @article.summary.present? %>
+      <p class="story__dek"><%= @article.summary %></p>
+    <% end %>
+    <div class="byline">
+      <span class="avatar" aria-hidden="true"><%= @article.author.initials %></span>
+      <div>
+        <%= link_to @article.author.name, author_path(@article.author), class: "byline__name" %>
+        <p class="meta"><%= pub_date(@article) %> · <%= @article.reading_minutes %> min read</p>
+      </div>
+    </div>
+  </header>
+
+  <% if @article.image? %>
+    <figure class="story__hero">
+      <%= cover_image(@article, css_class: "story__hero-image", link: false, eager: true) %>
+      <% if @article.image_caption.present? %><figcaption><%= @article.image_caption %></figcaption><% end %>
+    </figure>
+  <% end %>
+
+  <div class="prose">
+    <%= @article.body_html %>
+  </div>
+
+  <footer class="story__foot">
+    <% if @article.tag_list.any? %>
+      <ul class="tags" aria-label="Tags">
+        <% @article.tag_list.each do |tag| %>
+          <li><%= link_to "##{tag}", tag_path(tag) %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <div class="author-box">
+      <span class="avatar avatar--lg" aria-hidden="true"><%= @article.author.initials %></span>
+      <div>
+        <p class="kicker">Written by</p>
+        <%= link_to @article.author.name, author_path(@article.author), class: "byline__name" %>
+        <% if @article.author.role.present? %><span class="muted"> — <%= @article.author.role %></span><% end %>
+        <% if @article.author.bio.present? %><p class="muted"><%= @article.author.bio %></p><% end %>
+      </div>
+    </div>
+  </footer>
+</article>
+
+<% related = @article.related %>
+<% if related.any? %>
+  <section class="related" aria-labelledby="related-heading">
+    <h2 id="related-heading" class="section-label">More in <%= @article.category.name %></h2>
+    <div class="grid">
+      <%= render partial: "articles/card", collection: related, as: :article %>
+    </div>
+  </section>
+<% end %>
+
+<%= render "shared/newsletter" %>

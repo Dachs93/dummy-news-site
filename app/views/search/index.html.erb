@@ -1,0 +1,16 @@
+<% content_for :title, @query.present? ? "Search: #{@query}" : "Search" %>
+<% content_for :head do %><meta name="robots" content="noindex"><% end %>
+
+<header class="page-head">
+  <p class="kicker">Search</p>
+  <h1 class="page-title"><%= @query.present? ? "Results for “#{@query}”" : "Search the archive" %></h1>
+  <%= form_with url: search_path, method: :get, class: "search search--large", role: "search" do |f| %>
+    <%= f.label :q, "Search articles", class: "visually-hidden" %>
+    <%= f.search_field :q, value: @query, placeholder: "e.g. kamal, rust, postgres", autofocus: @query.blank? %>
+    <button type="submit" class="btn btn--primary">Search</button>
+  <% end %>
+</header>
+
+<% if @page %>
+  <%= render "articles/list", page: @page, empty_message: "No articles matched “#{@query}”. Try a different keyword." %>
+<% end %>

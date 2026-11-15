@@ -1,0 +1,5 @@
+<p class="meta">
+  <%= link_to article.author.name, author_path(article.author), class: "meta__author" %>
+  <span aria-hidden="true">·</span> <%= relative_date(article) %>
+  <span aria-hidden="true">·</span> <%= article.reading_minutes %> min read
+</p>

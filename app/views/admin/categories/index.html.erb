@@ -1,0 +1,24 @@
+<% content_for :title, "Topics" %>
+<div class="admin-head">
+  <h1 class="page-title">Topics</h1>
+  <%= link_to "New topic", new_admin_category_path, class: "btn btn--primary" %>
+</div>
+<div class="table-wrap">
+  <table class="table">
+    <thead><tr><th>#</th><th>Name</th><th>Slug</th><th>Articles</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <td><%= category.position %></td>
+          <td><%= link_to category.name, edit_admin_category_path(category), class: "table__title" %></td>
+          <td><code><%= category.slug %></code></td>
+          <td><%= category.articles_count %></td>
+          <td class="table__actions">
+            <%= link_to "View", category_path(category), class: "muted-link" %>
+            <%= link_to "Edit", edit_admin_category_path(category), class: "muted-link" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,14 @@
+<% if @tag %>
+  <% content_for :title, "##{@tag}" %>
+  <% content_for :description, "Software development news tagged ##{@tag}." %>
+<% else %>
+  <% content_for :title, "Latest news" %>
+<% end %>
+
+<header class="page-head">
+  <p class="kicker"><%= @tag ? "Tag" : "Archive" %></p>
+  <h1 class="page-title"><%= @tag ? "##{@tag}" : "Latest news" %></h1>
+  <p class="muted"><%= @tag ? "Every story tagged ##{@tag}." : "Every story, newest first." %></p>
+</header>
+
+<%= render "articles/list", page: @page %>
