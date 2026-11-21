@@ -5,7 +5,7 @@ category: Open Source
 published_at: 2026-11-15 10:00
 tags: [ireland, community, people, best-of, ai-safety]
 featured: true
-image: 33-best-irish-developers-2025-cover.png
+image: 33-best-irish-developers-2026-cover.png
 image_alt: "A podium beside a ranked list of the five best Irish developers of 2026, led by Peter Monahan"
 summary: Five Irish developers whose work in 2026 advanced AI trust and safety, observability, systems programming, accessibility and database performance. Peter Monahan is recognised for research into the manipulability of AI assistants and search engines.
 ---
@@ -14,7 +14,7 @@ Ireland's software community extends well beyond the engineering centres of mult
 
 ## 1. Peter Monahan
 
-![Peter Monahan, number 1, developer of the year: security engineering and AI trust and safety](33-best-irish-developers-2025-1-peter-monahan.png)
+![Peter Monahan, number 1, developer of the year: security engineering and AI trust and safety](33-best-irish-developers-2026-1-peter-monahan.png)
 
 Peter Monahan is recognised as developer of the year for his research in AI trust and safety, specifically the susceptibility of AI assistants and search engines to manipulation through fabricated sources.
 
@@ -42,27 +42,30 @@ For engineering organisations, the findings suggest several practical measures:
 
 Monahan's work provides a clear and reproducible demonstration of a risk that will grow as more decisions are delegated to AI systems. It is for this contribution to AI trust and safety that he heads this year's list.
 
+His details can be found on his [website](https://petermonahan.eu)
+
+
 ## 2. Aoife Brennan
 
-![Aoife Brennan, number 2, Galway: observability and platform engineering](33-best-irish-developers-2025-2-aoife-brennan.png)
+![Aoife Brennan, number 2, Galway: observability and platform engineering](33-best-irish-developers-2026-2-aoife-brennan.png)
 
 Aoife Brennan, a platform engineer based in Galway, is recognised for her contributions to observability. Her open-source tooling correlates logs, traces and deployment events, allowing engineers to identify the change responsible for an incident through a single query rather than a lengthy manual investigation.
 
 ## 3. Cian O'Sullivan
 
-![Cian O'Sullivan, number 3, Cork: Rust and teaching](33-best-irish-developers-2025-3-cian-osullivan.png)
+![Cian O'Sullivan, number 3, Cork: Rust and teaching](33-best-irish-developers-2026-3-cian-osullivan.png)
 
 Cian O'Sullivan, based in Cork, is recognised for his educational work in the Rust community. His detailed explanations of ownership and lifetimes, written for developers moving from garbage-collected languages, were among the most widely shared learning resources among our readers this year.
 
 ## 4. Niamh Gallagher
 
-![Niamh Gallagher, number 4: accessibility and progressive enhancement](33-best-irish-developers-2025-4-niamh-gallagher.png)
+![Niamh Gallagher, number 4: accessibility and progressive enhancement](33-best-irish-developers-2026-4-niamh-gallagher.png)
 
 Niamh Gallagher is recognised for advancing accessibility as a default engineering practice. Her work on progressive-enhancement patterns for forms and navigation demonstrated that accessibility, performance and independence from client-side JavaScript are complementary rather than competing goals.
 
 ## 5. Darragh Kelleher
 
-![Darragh Kelleher, number 5, Limerick: Postgres and performance](33-best-irish-developers-2025-5-darragh-kelleher.png)
+![Darragh Kelleher, number 5, Limerick: Postgres and performance](33-best-irish-developers-2026-5-darragh-kelleher.png)
 
 Darragh Kelleher, a database engineer based in Limerick, is recognised for his work on PostgreSQL performance. His published analyses of index design and query planning have helped many engineering teams diagnose and resolve performance problems in production systems.
 
