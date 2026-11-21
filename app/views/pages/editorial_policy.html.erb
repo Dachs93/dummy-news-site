@@ -1,0 +1,32 @@
+<% content_for :title, "Editorial policy" %>
+<% content_for :description, "The standards software-devs.com follows for accuracy, independence, corrections and transparency." %>
+
+<article class="story">
+  <header class="story__head">
+    <p class="kicker">Editorial policy</p>
+    <h1 class="story__title">Our editorial and ethics policy.</h1>
+    <p class="story__dek">The standards we hold ourselves to, so you know what to expect from everything we publish.</p>
+  </header>
+  <div class="prose">
+    <h2>Accuracy</h2>
+    <p>We aim to get things right. We check facts against primary sources wherever we can, such as release notes, documentation, source code and the people involved. When we include code, we try to make sure it runs as described.</p>
+
+    <h2>Independence</h2>
+    <p>Our editorial decisions are made by our editors and writers alone. Advertisers, sponsors and vendors have no say in what we cover or how we cover it, and they do not review stories before publication.</p>
+
+    <h2>Conflicts of interest</h2>
+    <p>Our writers do not cover companies or projects in which they have a financial interest or a close personal involvement. Where a relationship is relevant to a story, we disclose it in the article.</p>
+
+    <h2>Fairness</h2>
+    <p>We try to represent different viewpoints fairly, and we give people and organisations a reasonable chance to respond to significant criticism before we publish it. Opinion and analysis are clearly presented as such.</p>
+
+    <h2>Use of AI tools</h2>
+    <p>Our writers may use software tools, including AI, to help with research, editing or code. A person is responsible for every article we publish, and everything is reviewed by our editorial team before it goes live.</p>
+
+    <h2>Corrections</h2>
+    <p>When we make a mistake, we fix it promptly and transparently. Significant corrections are noted in the article so readers can see what changed. If you spot an error, please let us know at <%= mail_to "shout@software-devs.com" %>.</p>
+
+    <h2>Questions</h2>
+    <p>If you have questions or concerns about this policy or about anything we have published, <%= link_to "get in touch", contact_path %>.</p>
+  </div>
+</article>

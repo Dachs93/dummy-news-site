@@ -15,6 +15,14 @@
     </ul>
     <h2>How we work</h2>
     <p>We write for working developers. That means fewer press releases and more context: what changed, why it matters, and what trade-offs come with it. When we explain how to do something, we try to include code you can actually run.</p>
+    <% if @authors.any? %>
+      <h2>Who we are</h2>
+      <ul>
+        <% @authors.each do |author| %>
+          <li><%= link_to author.name, author_path(author) %><% if author.role.present? %> — <%= author.role %><% end %></li>
+        <% end %>
+      </ul>
+    <% end %>
     <h2>Stay in the loop</h2>
     <p>Follow along with our <%= link_to "RSS feed", feed_path %> or subscribe to the weekly digest below.</p>
   </div>

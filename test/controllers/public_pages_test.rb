@@ -35,10 +35,27 @@ class PublicPagesTest < ActionDispatch::IntegrationTest
 
   test "listing pages" do
     [ articles_path, category_path(categories(:devops)), author_path(authors(:maya)), tag_path("rust"),
-      search_path(q: "kamal"), search_path, about_path ].each do |path|
+      search_path(q: "kamal"), search_path, about_path, contact_path, editorial_policy_path ].each do |path|
       get path
       assert_response :success, path
     end
+  end
+
+  test "about page links to author bios" do
+    get about_path
+    assert_select ".prose a[href='#{author_path(authors(:maya))}']", "Maya Okafor"
+  end
+
+  test "contact page shows the email address" do
+    get contact_path
+    assert_select ".prose a[href='mailto:shout@software-devs.com']", "shout@software-devs.com"
+  end
+
+  test "editorial policy page" do
+    get editorial_policy_path
+    assert_select "h1.story__title"
+    assert_select ".prose a[href='mailto:shout@software-devs.com']"
+    assert_select ".site-footer a[href='#{editorial_policy_path}']", "Editorial policy"
   end
 
   test "feed and sitemap" do

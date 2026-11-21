@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get "tags/:tag", to: "articles#index", as: :tag, constraints: { tag: %r{[^/]+} }
   get "search", to: "search#index"
   get "about", to: "pages#about"
+  get "contact", to: "pages#contact"
+  get "editorial-policy", to: "pages#editorial_policy", as: :editorial_policy
   resources :subscribers, only: :create
 
   get "feed", to: "feeds#show", defaults: { format: :atom }, as: :feed
